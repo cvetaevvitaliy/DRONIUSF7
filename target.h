@@ -53,7 +53,7 @@
 #define USE_ACC_SPI_MPU6000
 #define USE_ACC_SPI_MPU6500
 
-//#define GYRO_1_ALIGN                CW180_DEG
+#define GYRO_1_ALIGN                CW0_DEG_FLIP
 
 #define USE_SPI_DEVICE_1 // GYRO/ACC
 #define SPI1_SCK_PIN            PA5
@@ -65,20 +65,21 @@
 /*---------------------------------*/
 
 /*-------------Baro----------------*/
-#define BARO_I2C_INSTANCE       (I2CDEV_1)
-#define USE_BARO
-#define USE_BARO_BMP280
-/*---------------------------------*/
+// *************** I2C /Baro/Mag *********************
 
-/*-------------I2C-----------------*/
 #define USE_I2C
+
 #define USE_I2C_DEVICE_1
 #define I2C_DEVICE_1            (I2CDEV_1)
 #define I2C1_SCL                PB8
 #define I2C1_SDA                PB9
-/*---------------------------------*/
 
-/*-------------Mag-----------------*/
+#define BARO_I2C_INSTANCE       (I2CDEV_1)
+#define USE_BARO
+#define USE_BARO_BMP280
+//#define USE_BARO_MS5611
+//#define USE_BARO_BMP085
+
 #define MAG_I2C_INSTANCE        (I2CDEV_1)
 #define USE_MAG
 #define USE_MAG_HMC5883
@@ -155,23 +156,20 @@
 
 /*--------------ADC----------------*/
 #define USE_ADC
-#define ADC_INSTANCE                        ADC3
-#define ADC3_DMA_OPT                        0  // DMA 2 Stream 0 Channel 2 
+#define ADC_INSTANCE                        ADC1  // Default added
+#define ADC1_DMA_OPT                        0  // DMA 2 Stream 0 Channel 0
+//#define USE_ADC
+//#define ADC_INSTANCE                        ADC3
+//#define ADC3_DMA_OPT                        0  // DMA 2 Stream 0 Channel 2
 
 #define VBAT_ADC_PIN                        PC1
 #define CURRENT_METER_ADC_PIN               PC0
-
-#define CURRENT_METER_SCALE_DEFAULT         166
-#define VBAT_SCALE_DEFAULT                  160
-
-#define DEFAULT_VOLTAGE_METER_SOURCE VOLTAGE_METER_ADC
-#define DEFAULT_CURRENT_METER_SOURCE CURRENT_METER_ADC
 /*---------------------------------*/
 
 
 /*-------------ESCs----------------*/
 #define USE_ESCSERIAL
-#define ESCSERIAL_TIMER_TX_PIN   PC7  // (HARDWARE=0)
+#define ESCSERIAL_TIMER_TX_PIN               PC7  // (HARDWARE=0)
 /*---------------------------------*/
 
 
@@ -180,6 +178,11 @@
 #define SERIALRX_PROVIDER        SERIALRX_SBUS
 #define SERIALRX_UART            SERIAL_PORT_USART1
 #define DEFAULT_FEATURES         ( FEATURE_OSD | FEATURE_TELEMETRY )
+
+#define DEFAULT_VOLTAGE_METER_SOURCE VOLTAGE_METER_ADC
+#define DEFAULT_CURRENT_METER_SOURCE CURRENT_METER_ADC
+#define CURRENT_METER_SCALE_DEFAULT         179
+#define VBAT_SCALE_DEFAULT                  112
 /*---------------------------------*/
 
 /*--------Camera comtrol-----------*/
